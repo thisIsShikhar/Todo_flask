@@ -13,8 +13,8 @@ db = SQLAlchemy(app)
 
 class Todo(db.Model):
     sno = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(200), primary_key = True)
-    desc = db.Column(db.String(500), primary_key = True)
+    title = db.Column(db.String(200), nullable = False)
+    desc = db.Column(db.String(500), nullable = False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self) -> str:
@@ -23,6 +23,9 @@ class Todo(db.Model):
 
 @app.route('/')
 def hello_world():
+    todo = Todo(title="First Todo", desc = "start investing in stack market")
+    db.session.add(todo)
+    db.session.commit()
     return render_template('index.html')
 
 
