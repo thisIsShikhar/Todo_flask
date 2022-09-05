@@ -22,6 +22,12 @@ class Todo(db.Model):
 
 @app.route('/', methods=["GET", "POST"])
 
+def Home():
+    allTodo = Todo.query.all()
+    return render_template('index.html', allTodo = allTodo)
+
+
+@app.route('/add', methods=["GET", "POST"])
 def create():
     if request.method == 'POST':
         print(request.form['title'])
@@ -30,15 +36,6 @@ def create():
         db.session.commit()
     allTodo = Todo.query.all()
     return render_template('index.html', allTodo = allTodo)
-
-@app.route('/get')
-def get():
-    allTodo = Todo.query.all()
-
-    print(allTodo)
-    return "Hey Todos"
-
-
 
 
 if __name__ == "__main__":
