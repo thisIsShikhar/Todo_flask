@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
 from datetime import datetime
@@ -34,8 +34,18 @@ def create():
         todo = Todo(title=request.form['title'], desc = request.form['desc'])
         db.session.add(todo)
         db.session.commit()
-    allTodo = Todo.query.all()
-    return render_template('index.html', allTodo = allTodo)
+    return redirect('/')
+
+@app.route('/update/int<sno>')
+def update():
+    pass
+
+@app.route('/delete/<int:sno>')
+def delete(sno):
+    todo  = Todo.query.filter_by(sno=sno).first()
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect('/')
 
 
 if __name__ == "__main__":
