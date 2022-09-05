@@ -2,7 +2,7 @@
 {% block body %}
   
     <div class="container my-2">
-      <h2>Add a Todo</h2>
+      <h2>Update Todo</h2>
         <form action="/add" method="POST">
             <div class="mb-3">
             <label for="title" class="form-label">Todo Title</label>
@@ -12,16 +12,16 @@
             <label for="desc" class="form-label">Todo Description</label>
             <input type="text" class="form-control" name="desc" id="desc">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
-    <div class="container my-4">
+    <!-- <div class="container my-4">
     {% if allTodo|length == 0 %}
     <div class="alert alert-dark" role="alert">No Todos Found! Add you first one.</div>
       
     {% else %}
     
-        <h2>Your Todos </h2>
+        <h2>Update Your Todos </h2>
         <table class="table">
             <thead>
               <tr>
@@ -48,7 +48,7 @@
             </tbody>
           </table>
     </div>
-    {% endif %}
+    {% endif %} -->
 
 
 {% endblock body %}

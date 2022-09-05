@@ -36,9 +36,13 @@ def create():
         db.session.commit()
     return redirect('/')
 
-@app.route('/update/int<sno>')
-def update():
-    pass
+@app.route('/update/<int:sno>', methods=["GET", "POST"])
+def update(sno):
+    print("before todo")
+    todo  = Todo.query.filter_by(sno=sno).first()
+    print("after todo")
+    return render_template('update.html', todo = todo)
+    
 
 @app.route('/delete/<int:sno>')
 def delete(sno):
