@@ -22,11 +22,21 @@ class Todo(db.Model):
 
 
 @app.route('/')
-def hello_world():
+def create():
     todo = Todo(title="First Todo", desc = "start investing in stack market")
     db.session.add(todo)
     db.session.commit()
-    return render_template('index.html')
+    allTodo = Todo.query.all()
+    return render_template('index.html', allTodo = allTodo)
+
+@app.route('/get')
+def get():
+    allTodo = Todo.query.all()
+
+    print(allTodo)
+    return "Hey Todos"
+
+
 
 
 if __name__ == "__main__":
