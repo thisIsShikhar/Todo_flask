@@ -1,6 +1,5 @@
-from email.policy import default
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 from datetime import datetime
@@ -21,11 +20,14 @@ class Todo(db.Model):
         return f"{self.sno} - {self.title}"
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
+
 def create():
-    todo = Todo(title="First Todo", desc = "start investing in stack market")
-    db.session.add(todo)
-    db.session.commit()
+    if request.method == 'POST':
+        print(request.form['title'])
+        todo = Todo(title=request.form['title'], desc = request.form['desc'])
+        db.session.add(todo)
+        db.session.commit()
     allTodo = Todo.query.all()
     return render_template('index.html', allTodo = allTodo)
 

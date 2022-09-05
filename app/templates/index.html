@@ -36,14 +36,15 @@
         </div>
     </nav>
     <div class="container my-2">
-        <form>
+      <h2>Add a Todo</h2>
+        <form action="/" method="POST">
             <div class="mb-3">
             <label for="title" class="form-label">Todo Title</label>
-            <input type="text" class="form-control" id="title">
+            <input type="text" class="form-control" name="title" id="title">
             </div>
             <div class="mb-3">
             <label for="desc" class="form-label">Todo Description</label>
-            <input type="text" class="form-control" id="desc">
+            <input type="text" class="form-control" name="desc" id="desc">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
