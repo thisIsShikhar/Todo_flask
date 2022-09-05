@@ -38,9 +38,15 @@ def create():
 
 @app.route('/update/<int:sno>', methods=["GET", "POST"])
 def update(sno):
-    print("before todo")
+    if request.method == 'POST':
+        todo  = Todo.query.filter_by(sno=sno).first()
+        todo.title = request.form['title']
+        todo.desc = request.form['desc']
+        db.session.add(todo)
+        db.session.commit()
+        return redirect('/')
+        
     todo  = Todo.query.filter_by(sno=sno).first()
-    print("after todo")
     return render_template('update.html', todo = todo)
     
 
@@ -53,5 +59,5 @@ def delete(sno):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 8000))
     app.run(debug=True, host='0.0.0.0', port=port)
